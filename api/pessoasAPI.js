@@ -36,10 +36,8 @@ export default async function handler(req, res) {
         if(!cpf) return res.status(400).json({message: "CPF é obrigatório"})
         if(!age) return res.status(400).json({message: "Idade é obrigatório"})
 
-<<<<<<< HEAD
-        //result recebe o resultado da inserção da pessoa nova na collection
-=======
         
+
         const cpfExiste = await collection.findOne({cpf: cpf.trim()})
 
         if(cpfExiste){
@@ -50,7 +48,7 @@ export default async function handler(req, res) {
             }
         }
 
->>>>>>> 5687c2d2c3369755a92c61c61a5ec9a2d6bf8618
+        //result recebe o resultado da inserção da pessoa nova na collection
         const result = await collection.insertOne({
             name: name.trim(),
             phone: phone.trim(),
