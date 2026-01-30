@@ -43,12 +43,14 @@ async function carregarPessoas() {
             idade.className = "idadePessoa"
             idade.textContent = p.idade
 
+            
+
             pessoaContent.appendChild(name)
             pessoaContent.appendChild(phone)
             pessoaContent.appendChild(cpf)
             pessoaContent.appendChild(idade)   
             
-            //Faltou criar botão de deletar e editar pessoas(Feature pra depois)
+            
         });
 
     }catch(error){
