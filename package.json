@@ -1,5 +1,10 @@
 {
+  "name": "crud-simples",
+  "version": "1.0.0",
+  "type": "module",
   "dependencies": {
-    "mongodb": "^7.0.0"
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "mongodb": "^5.9.2"
   }
 }

@@ -1,5 +1,4 @@
-
-const API = "../api/pessoasAPI"
+const API = "../api/pessoasAPI.js"
 
 async function carregarPessoas() {
     try{
@@ -24,16 +23,18 @@ async function carregarPessoas() {
 
         pessoas.forEach(p => {
 
+            const li = document.createElement("li")
+
             const pessoaContent = document.createElement("div")
             pessoaContent.className = "pessoa-content"
 
             const name = document.createElement("div")
             name.className = "nomePessoa"
-            name.textContent = p.nome
+            name.textContent = p.name
 
             const phone = document.createElement("div")
             phone.className = "telefonePessoa"
-            phone.textContent = p.telefone
+            phone.textContent = p.phone
 
             const cpf = document.createElement("div")
             cpf.className = "cpfPessoa"
@@ -41,7 +42,7 @@ async function carregarPessoas() {
 
             const idade = document.createElement("div")
             idade.className = "idadePessoa"
-            idade.textContent = p.idade
+            idade.textContent = p.age
 
             
 
@@ -49,6 +50,9 @@ async function carregarPessoas() {
             pessoaContent.appendChild(phone)
             pessoaContent.appendChild(cpf)
             pessoaContent.appendChild(idade)   
+
+            li.appendChild(pessoaContent)
+            ul.appendChild(li)
             
             
         });
@@ -76,12 +80,12 @@ async function carregarPessoas() {
         try{
             const response = await fetch(API,{
                 method: "POST",
-                headers: {"Content-Type": "aplication/json"},
-                body: JSON.stringfy({
-                    nome: nameInput.value,
-                    telefone: telefoneInput.value,
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({
+                    name: nameInput.value,
+                    phone: telefoneInput.value,
                     cpf: cpfInput.value,
-                    idade: idadeInput.value
+                    age: idadeInput.value
                 })
             })
 
@@ -91,10 +95,11 @@ async function carregarPessoas() {
                 alert(data.message || "Erro ao adicionar pessoa")
             }
             
-            nameInput.innerHTML = ""
-            telefoneInput.innerHTML = ""
-            cpfInput.innerHTML = ""
-            idadeInput.innerHTML = ""
+            nameInput.value = ""
+            telefoneInput.value = ""
+            cpfInput.value = ""
+            idadeInput.value = ""
+
             carregarPessoas()
             alert("Pessoa adicionada com sucesso")
         }catch(error){
@@ -104,4 +109,5 @@ async function carregarPessoas() {
     
     }
 
-    document.getElementById("add").addEventListener("click", adicionarPessoa())
+    document.getElementById("add").addEventListener("click", adicionarPessoa)
+    carregarPessoas()
