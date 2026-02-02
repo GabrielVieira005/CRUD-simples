@@ -1,200 +1,52 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    min-height: 100vh;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-}
-
-.container {
-    background: white;
-    border-radius: 20px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-    padding: 40px;
-    max-width: 900px;
-    width: 100%;
-    animation: fadeIn 0.5s ease-in;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center;     /* Centraliza verticalmente */
+    height: 100vh;           /* Define a altura total da tela */
+    margin: 0;
+    font-family: Times New Roman, Times, serif;
+    background-color: gray;
+    
 }
 
 h1 {
-    color: #333;
     text-align: center;
-    margin-bottom: 30px;
-    font-size: 2.5em;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: rgb(188, 188, 188);
 }
 
-
-
-#pessoas-list {
-    list-style: none;
-}
-
-.empty-message {
-    text-align: center;
-    padding: 40px;
-    color: #999;
-    font-size: 1.1em;
-    background: #f8f9fa;
-    border-radius: 10px;
-    border: 2px dashed #ddd;
-}
-
-.pessoa-content {
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-    padding: 20px;
-    margin-bottom: 15px;
-    border-radius: 12px;
+#container {
     display: grid;
-    grid-template-columns: 2fr 1.5fr 1.5fr 0.5fr;
-    gap: 15px;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
+    width: 270px;
+    height: 350px;
+    background-color: rgb(86, 86, 86);
+    border-radius: 35px;
 
-.pessoa-content:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-}
-
-.nomePessoa,
-.telefonePessoa,
-.cpfPessoa,
-.idadePessoa {
-    padding: 10px;
-    background: white;
-    border-radius: 8px;
-    font-weight: 500;
-    color: #333;
-}
-
-.nomePessoa {
-    color: #667eea;
-    font-weight: 600;
-}
-
-.telefonePessoa::before {
-    content: "📞 ";
-}
-
-.cpfPessoa::before {
-    content: "🆔 ";
-}
-
-.idadePessoa {
-    text-align: center;
-    font-weight: 600;
-    color: #764ba2;
-}
-
-.idadePessoa::after {
-    content: " anos";
-    font-size: 0.8em;
-    color: #999;
-}
 
 #adicionandoPessoa {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 15px;
-    margin-bottom: 20px;
+    justify-content: center;
+    margin-top: 20px;
 }
 
 input[type="text"] {
-    padding: 15px;
-    border: 2px solid #e0e0e0;
-    border-radius: 10px;
-    font-size: 1em;
-    transition: all 0.3s ease;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-input[type="text"]:focus {
-    outline: none;
-    border-color: #667eea;
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-    transform: translateY(-2px);
-}
-
-input[type="text"]::placeholder {
-    color: #aaa;
-}
-
-.button-add {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+    width: 200px;
+    height: 30px;
+    border-radius: 15px;
+    border: none;
+    padding: 5px 10px;
+    font-size: 16px;
+    margin: 5px;
 }
 
 #add {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    border: none;
-    padding: 15px 30px;
-    font-size: 1.1em;
-    font-weight: 600;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    border-radius: 35px;
+    width: 100px;
 }
 
-#add:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+#button-add {
+    display: flex;
+    margin: 0 auto;
+    width: 100px;
 }
-
-#add:active {
-    transform: translateY(-1px);
-}
-
-@media (max-width: 768px) {
-    .container {
-        padding: 20px;
-    }
-
-    h1 {
-        font-size: 1.8em;
-    }
-
-    .pessoa-content {
-        grid-template-columns: 1fr;
-        gap: 10px;
-    }
-
-    #adicionandoPessoa {
-        grid-template-columns: 1fr;
-    }
-}
-
-/* Animação de loading */
-@keyframes pulse {
-    0%, 100% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0.5;
-    }
 }

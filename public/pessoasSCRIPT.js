@@ -44,6 +44,8 @@ async function carregarPessoas() {
             idade.className = "idadePessoa"
             idade.textContent = p.age
 
+            
+
             pessoaContent.appendChild(name)
             pessoaContent.appendChild(phone)
             pessoaContent.appendChild(cpf)
