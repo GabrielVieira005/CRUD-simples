@@ -50,6 +50,31 @@ export default async function handler(req, res) {
             message: "Pessoa adicionada com sucesso",
             id: result.insertedId
         })
+    }else if(req.method === "DELETE") {
+        const { id } = req.query
+        await collection.deleteOne({ _id: new ObjectId(id)})
+
+        res.status(200).json({ message: "Tarefa deletada com sucesso"})
+    }else if(req.method === "PATCH"){
+        const {name, phone, cpf, age} = req.body
+
+        if(!name) return res.status(400).json({message: "Nome é obrigatório"})
+        if(!phone) return res.status(400).json({message: "Telefone é obrigatório"})
+        if(!cpf) return res.status(400).json({message: "CPF é obrigatório"})
+        if(!age) return res.status(400).json({message: "Idade é obrigatória"})
+
+        await collection.updateOne(
+            {_id: new ObjectId(id)},
+            {
+                $set: {
+                    name,
+                    phone,
+                    cpf,
+                    age,
+                    atualizadoem: new Date()
+                }
+            })
+            res.status(200).json({message: "Pessoa atualizada com sucesso"})
     }
-    
+
 }

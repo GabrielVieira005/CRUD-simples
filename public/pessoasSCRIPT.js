@@ -49,17 +49,35 @@ async function carregarPessoas() {
             pessoaContent.appendChild(cpf)
             pessoaContent.appendChild(idade)   
 
+            const pessButtons = document.createElement("div")
+            pessButtons.className = "pessButtons"
+
+            const btnDelete = document.createElement("button")
+            btnDelete.className = "btnDelete"
+            btnDelete.textContent = "⛔"
+            btnDelete.title = "Deletar Pessoa"
+            btnDelete.onclick = () => deletarPessoa(String(p._id))
+
+            const btnEdit = document.createElement("button")
+            btnEdit.className = "btnEdit"
+            btnEdit.textContent = "✏️"
+            btnEdit.title = "Editar Pessoa"
+            btnEdit.onclick = () => editarPessoa(String(p._id))
+
+            pessButtons.appendChild(btnEdit)
+            pessButtons.appendChild(btnDelete)
             li.appendChild(pessoaContent)
+            li.appendChild(pessButtons)
             ul.appendChild(li)
             
-            //Faltou criar botão de deletar e editar pessoas(Feature pra depois)
+            
         });
 
-    }catch(error){
-        console.error("Erro ao carregar tarefas")
-        const ul = document.getElementById("pessoas-list")
-        ul.innerHTML = '<li id="empty-message">Erro ao carregar as pessoas</li>'
-        }
+        }catch(error){
+            console.error("Erro ao carregar pessoas")
+            const ul = document.getElementById("pessoas-list")
+            ul.innerHTML = '<li id="empty-message">Erro ao carregar as pessoas</li>'
+            }
     }
 
     async function adicionarPessoa() {
@@ -72,8 +90,6 @@ async function carregarPessoas() {
             alert("Todos os campos são obrigatorios")
             return
         }
-
-        //Depois fazer regex para numero de celular e CPF
 
         try{
             const response = await fetch(API,{
@@ -106,6 +122,108 @@ async function carregarPessoas() {
         }
     
     }
+
+    async function deletarPessoa(id) {
+        await fetch(API , {
+            method: "DELETE",
+            headers:{ "Content-Type": "application/json" },
+            body: JSON.stringify({
+                id: id,
+                status: "Deletada"
+            })
+        })
+        
+    }
+
+    async function editarPessoa(id) {
+        const res = await fetch(API)
+        const pessoas = await res.json()
+        const pessoa = pessoas.find(p => String(p._id) === id)
+
+        if(!pessoa){
+            alert("Não existem pessoas ainda")
+            return
+        }
+
+        const novoNome = prompt("Digite o novo nome: ", pessoa.nome)
+        if(novoNome == null) return
+
+        const novoTelefone = prompt("Digite o novo telefone ", pessoa.telefone)
+        if(novoTelefone == null) return
+
+        const novoCpf = prompt("Digite o novo CPF: ", pessoa.cpf)
+        if(novoCpf == null) return
+
+        const novoIdade = prompt("Digite a nova idade ", pessoa.idade)
+        if(novoIdade == null) return
+
+
+        try{
+            const response = await fetch(API, {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                id:id,
+                nome: novoNome,
+                telefone: novoTelefone,
+                cpf: novoCpf,
+                idade: novoIdade
+            })
+        })
+
+        const data = await response.json()
+
+        if(!response.ok) {
+            alert(data.message || "Erro ao atualizar pessoa")
+            return
+        }
+        carregarPessoas()
+        alert("A pessoa foi atualizada com sucesso")
+
+        }catch(error){
+            console.error("Erro:", error)
+            alert("Erro ao atualizar pessoa")
+
+        }
+       
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+  
+     function regexCPF(input) {
+        let valor = input.value.replace(/\D/g, '');
+        
+        if (valor.length <= 11) {
+        valor = valor.replace(/(\d{3})(\d)/, '$1.$2');
+        valor = valor.replace(/(\d{3})(\d)/, '$1.$2');
+        valor = valor.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+        }
+        
+        input.value = valor;
+    }
+
+  
+    function regexTelefone(input) {
+        let valor = input.value.replace(/\D/g, '');
+        
+        if (valor.length <= 11) {
+        valor = valor.replace(/(\d{2})(\d)/, '($1) $2');
+        valor = valor.replace(/(\d{5})(\d)/, '$1-$2');
+        }
+        
+        input.value = valor;
+    }
+
+    // Aplicar as máscaras nos inputs
+    document.getElementById('cpfInput').addEventListener('input', function() {
+        regexCPF(this);
+    });
+
+    document.getElementById('telefoneInput').addEventListener('input', function() {
+        regexTelefone(this);
+    });
+    });
+    
 
     document.getElementById("add").addEventListener("click", adicionarPessoa)
     carregarPessoas()
