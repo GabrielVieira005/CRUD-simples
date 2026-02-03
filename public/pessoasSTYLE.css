@@ -18,9 +18,19 @@ h1 {
 #container {
     display: grid;
     width: 270px;
-    height: 350px;
+    height: 450px;
     background-color: rgb(86, 86, 86);
     border-radius: 35px;
+}
+
+#container-pessoas {
+    display: grid;
+    width: 500px;
+    height: 450px;
+    background-color: rgb(86, 86, 86);
+    border-radius: 35px;
+    margin-left: 20px;
+}
 
 
 #adicionandoPessoa {
@@ -40,13 +50,13 @@ input[type="text"] {
 }
 
 #add {
-    border-radius: 35px;
+    border-radius: 20px;
     width: 100px;
+    height: 70px;
 }
 
 #button-add {
     display: flex;
     margin: 0 auto;
     width: 100px;
-}
 }
