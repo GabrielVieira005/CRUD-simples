@@ -61,12 +61,18 @@ export default async function handler(req, res) {
             message: "Pessoa adicionada com sucesso",
             id: result.insertedId
         })
-    }else if(req.method === "DELETE") {
+    }
+    //Método DELETE para deletar alguma pessoa
+    else if(req.method === "DELETE") {
+        //Variável ID recebe a requisição para deletar
         const { id } = req.query
+        //Busca na collection o id escolhido para deletar e o dele
         await collection.deleteOne({ _id: new ObjectId(id)})
 
         res.status(200).json({ message: "Tarefa deletada com sucesso"})
-    }else if(req.method === "PATCH"){
+    }
+    
+    else if(req.method === "PATCH"){
         const {name, phone, cpf, age} = req.body
 
         if(!name) return res.status(400).json({message: "Nome é obrigatório"})

@@ -49,14 +49,49 @@ input[type="text"] {
     margin: 5px;
 }
 
+input[type="text"]:focus {
+    background-color: rgb(196, 196, 196);
+}
+
+#search-bar {
+    width: 470px;
+    height: 30px;
+    border-radius: 15px;
+    border: none;
+    padding: 5px 10px;
+    font-size: 16px;
+    margin: 5px;
+}
+
 #add {
     border-radius: 20px;
     width: 100px;
     height: 70px;
+    background-color: rgb(136, 136, 136);
+}
+
+#add:hover {
+    transform: scale(1.05);
+    background-color: gray;
 }
 
 #button-add {
     display: flex;
     margin: 0 auto;
     width: 100px;
+}
+
+#lista {
+    display: grid;
+    justify-items: center;
+    margin-top: 20px;
+}
+
+#pessoas-list {
+    display: grid;
+    justify-items: center;
+    margin-top: 20px;
+    overflow-y: auto;
+    height: 350px;
+
 }
